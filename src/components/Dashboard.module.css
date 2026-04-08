@@ -1,0 +1,97 @@
+.dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.adminPanel {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--card-bg); /* Opaque card background */
+  border: 2px dashed var(--accent-gold);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.adminPanelTitle {
+  color: var(--accent-gold);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+
+.button {
+  background-color: var(--accent-gold);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: 100%;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 2rem 0 1rem 0;
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.95);
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  border-left: 5px solid var(--accent-gold);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.accordionHeader {
+  background: linear-gradient(to right, rgba(17, 40, 23, 0.9), rgba(26, 56, 33, 0.9));
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.accordionHeader:hover {
+  transform: translateY(-2px);
+}
+
+.badge {
+  background-color: var(--accent-blue);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}

@@ -1,0 +1,94 @@
+.builderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  border: 1px dashed var(--accent-gold);
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.title {
+  color: var(--accent-gold);
+  font-weight: 700;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr; /* Field on one side, Builder on the other */
+  }
+}
+
+.tableContainer {
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableHeader {
+  background-color: rgba(226, 179, 74, 0.1);
+  font-weight: 600;
+  color: var(--accent-gold);
+  padding: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.cell {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.orderNumber {
+  font-weight: 700;
+  color: var(--text-secondary);
+  justify-content: center;
+  border-right: 1px solid var(--border-color);
+}
+
+.select {
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 4px;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  font-size: 0.875rem;
+}
+
+.saveButton {
+  padding: 0.75rem;
+  background-color: var(--accent-gold);
+  color: var(--bg-color);
+  font-weight: 700;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: 1rem;
+  transition: opacity 0.2s;
+}
+
+.saveButton:hover {
+  opacity: 0.9;
+}

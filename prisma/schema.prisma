@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id           String        @id @default(uuid())
+  name         String        @unique
+  votes        Vote[]
+  comments     Comment[]
+  managedPolls Poll[]        @relation("PollManager")
+  lineupEntries LineupEntry[]
+}
+
+model Poll {
+  id        String        @id @default(uuid())
+  title     String
+  opponent  String?
+  homeAway  String?
+  startTime DateTime
+  type      String        @default("GAME")
+  managerId String?
+  manager   Member?       @relation("PollManager", fields: [managerId], references: [id])
+  votes     Vote[]
+  comments  Comment[]
+  lineups   LineupEntry[]
+  createdAt DateTime      @default(now())
+}
+
+model Vote {
+  id        String   @id @default(uuid())
+  pollId    String
+  memberId  String
+  status    String   // ATTEND, ABSENT, SPECTATE
+  poll      Poll     @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  member    Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([pollId, memberId])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  pollId    String
+  memberId  String
+  content   String
+  poll      Poll     @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  member    Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model LineupEntry {
+  id        String   @id @default(uuid())
+  pollId    String
+  memberId  String?
+  order     Int      // 1 to 9
+  position  String?  // P, C, 1B, 2B, 3B, SS, LF, CF, RF, DH
+  poll      Poll     @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  member    Member?  @relation(fields: [memberId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+
+  @@unique([pollId, order])
+}

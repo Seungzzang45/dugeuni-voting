@@ -1,0 +1,134 @@
+.fieldContainer {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  background-color: var(--bg-color);
+  border: 4px solid var(--text-primary);
+  border-radius: 4px 4px 50% 50%;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* The dirt infield */
+.infield {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--field-dirt);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.infieldGrass {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  right: 15%;
+  bottom: 15%;
+  background-color: var(--bg-color); /* use the field green */
+  border-radius: 4px; /* Slight rounding */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Bases */
+.base {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  transform: rotate(-45deg); /* Counter the infield rotation to make them square */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.baseHome {
+  bottom: -6px;
+  right: -6px;
+  border-radius: 50% 50% 0 50%; /* Home plate shape approximation */
+}
+
+.base1 { top: -6px; right: -6px; }
+.base2 { top: -6px; left: -6px; }
+.base3 { bottom: -6px; left: -6px; }
+
+/* Mound */
+.mound {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  background-color: var(--field-dirt);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.pitcherPlate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 12px;
+  height: 4px;
+  background-color: white;
+}
+
+/* Player tags */
+.playerTag {
+  position: absolute;
+  transform: translate(-50%, -50%); /* Center on coordinate */
+  background-color: rgba(17, 40, 23, 0.95); /* dark green background */
+  border: 1px solid var(--accent-gold);
+  color: #ffffff; /* FORCE WHITE TEXT */
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.posLabel {
+  font-size: 0.65rem;
+  color: #fcd34d; /* Bright gold */
+  text-transform: uppercase;
+}
+
+.orderLabel {
+  background-color: #dc2626; /* Bright Red */
+  color: #ffffff; /* White text */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-weight: 800;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  border: 1px solid #ffffff;
+}
+
+/* Coordinates in % (Left, Top) */
+.posC { left: 50%; top: 92%; }
+.posP { left: 50%; top: 62%; }
+.pos1B { left: 80%; top: 60%; }
+.pos2B { left: 65%; top: 40%; }
+.pos3B { left: 20%; top: 60%; }
+.posSS { left: 35%; top: 40%; }
+.posLF { left: 20%; top: 15%; }
+.posCF { left: 50%; top: 10%; }
+.posRF { left: 80%; top: 15%; }
+.posDH { left: 10%; top: 85%; }

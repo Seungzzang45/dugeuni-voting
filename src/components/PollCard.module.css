@@ -1,0 +1,208 @@
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(to right, rgba(17, 40, 23, 0.8), rgba(26, 56, 33, 0.8));
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff; /* White text for dark headers */
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.homeAwayBadge {
+  background-color: var(--accent-blue);
+  color: #ffffff;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.managerInfo {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9); /* Lighter text over dark green */
+}
+
+.managerSelect {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid var(--accent-gold);
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.body {
+  padding: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.votersList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+/* Big touch target for non-voters */
+.voterBadge {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 90px;
+}
+
+.voterBadgeSmall {
+  flex: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 9999px;
+  background-color: var(--bg-color);
+}
+
+.voterBadge:hover {
+  transform: translateY(-2px);
+  border-color: var(--text-secondary);
+}
+
+.voterAttend { background-color: rgba(16, 185, 129, 0.1); color: var(--attend-color); border-color: rgba(16, 185, 129, 0.2); }
+.voterAbsent { background-color: rgba(239, 68, 68, 0.1); color: var(--absent-color); border-color: rgba(239, 68, 68, 0.2); }
+.voterSpectate { background-color: rgba(139, 92, 246, 0.1); color: var(--spectate-color); border-color: rgba(139, 92, 246, 0.2); }
+.voterNone { color: var(--text-secondary); }
+
+/* Bottom Sheet */
+.bottomSheetOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+}
+
+.bottomSheet {
+  width: 100%;
+  background-color: var(--card-bg);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+  box-shadow: 0 -10px 25px rgba(0,0,0,0.5);
+  border-top: 1px solid var(--border-color);
+}
+
+.sheetTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sheetButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sheetBtn {
+  padding: 1.25rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  transition: opacity 0.2s;
+}
+.sheetBtn:hover { opacity: 0.8; }
+.btnAttend { background-color: var(--attend-color); color: white; }
+.btnAbsent { background-color: var(--absent-color); color: white; }
+.btnSpectate { background-color: var(--spectate-color); color: white; }
+.btnCancelSheet { background-color: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); margin-top: 1rem; }
+
+.comments {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.commentItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-color);
+  border-radius: 8px;
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.commentName {
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+
+.commentDate {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.commentForm {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.commentSelect, .commentInput {
+  padding: 0.75rem;
+  border-radius: 6px;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+.commentInput { flex: 1; min-width: 200px; }
+
+.commentButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  background-color: var(--accent-gold);
+  color: var(--bg-color);
+  font-weight: 700;
+}
