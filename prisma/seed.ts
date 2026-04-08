@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+
 const members = [
   "신승우", "전계훈", "홍경택", "신광덕", "윤민환", 
   "안황기", "신세휘", "이호겸", "김덕겸", "김상훈", 
