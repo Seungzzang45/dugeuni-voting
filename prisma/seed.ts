@@ -59,6 +59,22 @@ async function main() {
     }
   }
 
+  // 중복된 GAME 투표 제거 (같은 title이 여러 개면 투표 수 많은 것 유지, 나머지 삭제)
+  for (const game of games) {
+    const dupes = await prisma.poll.findMany({
+      where: { title: game.title, type: "GAME" },
+      include: { _count: { select: { votes: true } } },
+      orderBy: { createdAt: 'asc' }
+    })
+    if (dupes.length > 1) {
+      const sorted = [...dupes].sort((a, b) => b._count.votes - a._count.votes)
+      for (const dupe of sorted.slice(1)) {
+        await prisma.poll.delete({ where: { id: dupe.id } })
+        console.log(`중복 삭제: "${game.title}"`)
+      }
+    }
+  }
+
   // 게임 생성 (title 기준으로 없으면 생성)
   for (const game of games) {
     const existing = await prisma.poll.findFirst({
