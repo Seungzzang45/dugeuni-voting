@@ -23,6 +23,7 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
   const votes = poll.votes || []
   const attendVotes = votes.filter((v: any) => v.status === 'ATTEND')
   const absentVotes = votes.filter((v: any) => v.status === 'ABSENT')
+  const waitVotes = votes.filter((v: any) => v.status === 'WAIT')
   const spectateVotes = votes.filter((v: any) => v.status === 'SPECTATE')
 
   const votedMemberIds = new Set(votes.map((v: any) => v.memberId))
@@ -124,8 +125,9 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
 
         {/* VERTICAL LISTING OF VOTERS */}
         <div style={{ marginTop: '3rem' }}>
-          {renderVoterList('참가', styles.voterAttend, attendVotes)}
+          {renderVoterList('참석', styles.voterAttend, attendVotes)}
           {renderVoterList('불참', styles.voterAbsent, absentVotes)}
+          {renderVoterList('대기', styles.voterWait, waitVotes)}
           {renderVoterList('구경', styles.voterSpectate, spectateVotes)}
         </div>
         
@@ -196,6 +198,7 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
             <div className={styles.sheetButtons}>
               <button className={`${styles.sheetBtn} ${styles.btnAttend}`} onClick={() => handleVoteSubmit('ATTEND')}>참석</button>
               <button className={`${styles.sheetBtn} ${styles.btnAbsent}`} onClick={() => handleVoteSubmit('ABSENT')}>불참</button>
+              <button className={`${styles.sheetBtn} ${styles.btnWait}`} onClick={() => handleVoteSubmit('WAIT')}>대기</button>
               <button className={`${styles.sheetBtn} ${styles.btnSpectate}`} onClick={() => handleVoteSubmit('SPECTATE')}>구경</button>
               <button className={`${styles.sheetBtn} ${styles.btnCancelSheet}`} onClick={() => setSelectedMember(null)}>닫기</button>
             </div>

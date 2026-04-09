@@ -102,6 +102,7 @@
 
 .voterAttend { background-color: rgba(16, 185, 129, 0.1); color: var(--attend-color); border-color: rgba(16, 185, 129, 0.2); }
 .voterAbsent { background-color: rgba(239, 68, 68, 0.1); color: var(--absent-color); border-color: rgba(239, 68, 68, 0.2); }
+.voterWait { background-color: rgba(245, 158, 11, 0.1); color: #d97706; border-color: rgba(245, 158, 11, 0.2); }
 .voterSpectate { background-color: rgba(139, 92, 246, 0.1); color: var(--spectate-color); border-color: rgba(139, 92, 246, 0.2); }
 .voterNone { color: var(--text-secondary); }
 
@@ -149,6 +150,7 @@
 .sheetBtn:hover { opacity: 0.8; }
 .btnAttend { background-color: var(--attend-color); color: white; }
 .btnAbsent { background-color: var(--absent-color); color: white; }
+.btnWait { background-color: #d97706; color: white; }
 .btnSpectate { background-color: var(--spectate-color); color: white; }
 .btnCancelSheet { background-color: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); margin-top: 1rem; }
 
