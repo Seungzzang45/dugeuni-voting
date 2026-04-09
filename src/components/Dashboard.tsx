@@ -152,7 +152,7 @@ export default function Dashboard({ members, initialPolls, pastPolls = [] }: Das
           </div>
         )}
         
-        {isExpanded && (
+        {isExpanded && !isEditing && (
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', alignItems: 'center' }}>
               {isAdmin && (
@@ -173,7 +173,7 @@ export default function Dashboard({ members, initialPolls, pastPolls = [] }: Das
             <PollCard poll={poll} members={members} isAdmin={isAdmin} />
             {isAdmin && (
               <div style={{ textAlign: 'right', marginTop: '-1rem', marginBottom: '2rem' }}>
-                <button 
+                <button
                   onClick={() => deletePollAndRevalidate(poll.id)}
                   style={{ background: '#ffeeee', color: '#ff4d4f', border: '1px solid #ff4d4f', padding: '0.4rem 1rem', borderRadius: '4px', cursor: 'pointer' }}
                 >
