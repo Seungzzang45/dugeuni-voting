@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import styles from './PollCard.module.css'
 import { format } from 'date-fns'
 import { ko } from 'date-fns/locale'
-import { castVote, cancelVote, addComment, updateManager } from '@/app/actions'
+import { castVote, cancelVote, addComment, updateManager, deleteComment } from '@/app/actions'
 import LineupBuilder from './LineupBuilder'
 import BaseballField from './BaseballField'
 
@@ -151,7 +151,18 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
               <div key={c.id} className={styles.commentItem}>
                 <div className={styles.commentHeader}>
                   <span className={styles.commentName}>{c.member.name}</span>
-                  <span className={styles.commentDate}>{format(new Date(c.createdAt), 'MM월 dd일 HH:mm', { locale: ko })}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span className={styles.commentDate}>{format(new Date(c.createdAt), 'MM월 dd일 HH:mm', { locale: ko })}</span>
+                    {isAdmin && (
+                      <button
+                        onClick={() => deleteComment(c.id)}
+                        style={{ background: 'transparent', color: '#ff4d4f', border: 'none', cursor: 'pointer', fontSize: '1rem', lineHeight: 1, padding: '0 2px' }}
+                        title="댓글 삭제"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <div>{c.content}</div>
               </div>
