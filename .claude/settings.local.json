@@ -4,7 +4,12 @@
       "Bash(railway login:*)",
       "Bash(railway version:*)",
       "Bash(railway --version)",
-      "Bash(railway --help)"
+      "Bash(railway --help)",
+      "Bash(railway whoami:*)",
+      "Bash(where railway:*)",
+      "Read(//c/Users/com/AppData/Roaming/npm/**)",
+      "Read(//c/Users/com/AppData/Local/Programs/**)",
+      "Read(//c/Users/com/AppData/**)"
     ]
   }
 }

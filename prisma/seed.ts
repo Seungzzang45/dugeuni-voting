@@ -14,7 +14,7 @@ const games = [
   { date: "2026-03-13T19:50:00+09:00", title: "03/13(금) 19:50 vs 인천하이에나", opponent: "인천하이에나", homeAway: "1루 후공" },
   { date: "2026-03-26T22:00:00+09:00", title: "03/26(목) 22:00 vs 겸손", opponent: "겸손", homeAway: "3루 선공" },
   { date: "2026-04-06T19:50:00+09:00", title: "04/06(월) 19:50 vs Bullies", opponent: "Bullies", homeAway: "1루 후공" },
-  { date: "2026-04-21T22:00:00+09:00", title: "04/21(화) 22:00 vs 미쁘다디자인", opponent: "미쁘다디자인", homeAway: "3루 선공" },
+  { date: "2026-04-23T22:00:00+09:00", title: "04/23(목) 22:00 vs 미쁘다디자인", opponent: "미쁘다디자인", homeAway: "3루 선공" },
   { date: "2026-05-04T22:00:00+09:00", title: "05/04(월) 22:00 vs 겸손", opponent: "겸손", homeAway: "1루 후공" },
   { date: "2026-05-11T19:50:00+09:00", title: "05/11(월) 19:50 vs Bullies", opponent: "Bullies", homeAway: "3루 선공" },
   { date: "2026-05-19T19:50:00+09:00", title: "05/19(화) 19:50 vs 미쁘다디자인", opponent: "미쁘다디자인", homeAway: "1루 후공" },

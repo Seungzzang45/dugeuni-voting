@@ -114,6 +114,19 @@ export async function createCustomPoll(title: string) {
   revalidatePath('/')
 }
 
+export async function updatePoll(pollId: string, data: { title: string; opponent?: string; homeAway?: string; startTime: string }) {
+  await prisma.poll.update({
+    where: { id: pollId },
+    data: {
+      title: data.title,
+      opponent: data.opponent || null,
+      homeAway: data.homeAway || null,
+      startTime: new Date(data.startTime),
+    }
+  })
+  revalidatePath('/')
+}
+
 export async function deletePollAndRevalidate(pollId: string) {
   await prisma.poll.delete({
     where: { id: pollId }
