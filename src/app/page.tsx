@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getMembers, getPolls } from './actions'
 import Dashboard from '@/components/Dashboard'
 
