@@ -17,7 +17,7 @@ const games = [
   { date: "2026-05-04T22:00:00+09:00", title: "05/04(월) 22:00 vs 겸손", opponent: "겸손", homeAway: "1루 후공" },
   { date: "2026-05-11T19:50:00+09:00", title: "05/11(월) 19:50 vs Bullies", opponent: "Bullies", homeAway: "3루 선공" },
   { date: "2026-05-19T19:50:00+09:00", title: "05/19(화) 19:50 vs 미쁘다디자인", opponent: "미쁘다디자인", homeAway: "1루 후공" },
-  { date: "2026-05-29T22:00:00+09:00", title: "05/29(금) 22:00 vs 인천하이에나", opponent: "인천하이에나", homeAway: "3루 선공" },
+  { date: "2026-05-29T22:00:00+09:00", title: "05/29(금) 22:00 vs 다크나이츠", opponent: "다크나이츠", homeAway: "3루 선공" },
   { date: "2026-06-25T22:00:00+09:00", title: "06/25(목) 22:00 vs R2B 바이퍼즈", opponent: "R2B 바이퍼즈", homeAway: "1루 후공" }
 ]
 
@@ -27,6 +27,13 @@ const migrations = [
     oldTitle: "04/21(화) 22:00 vs 미쁘다디자인",
     newTitle: "04/23(목) 22:00 vs 미쁘다디자인",
     newDate: "2026-04-23T22:00:00+09:00",
+    newOpponent: "미쁘다디자인",
+  },
+  {
+    oldTitle: "05/29(금) 22:00 vs 인천하이에나",
+    newTitle: "05/29(금) 22:00 vs 다크나이츠",
+    newDate: "2026-05-29T22:00:00+09:00",
+    newOpponent: "다크나이츠",
   }
 ]
 
@@ -53,6 +60,7 @@ async function main() {
         data: {
           title: migration.newTitle,
           startTime: new Date(migration.newDate),
+          opponent: migration.newOpponent ?? game.opponent,
         }
       })
       console.log(`Updated: "${migration.oldTitle}" → "${migration.newTitle}"`)
