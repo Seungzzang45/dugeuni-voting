@@ -17,8 +17,14 @@ const POSITIONS = ['P', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF']
 
 export default function BaseballField({ lineup }: BaseballFieldProps) {
   const getPlayerAtPos = (pos: string) => lineup.find(l => l.position === pos)
-  
+
+  // 타순이 있는 선수들 (1~9번, BENCH 제외) - 타순 순서로 정렬
+  const battingOrder = lineup
+    .filter(l => l.member && l.order >= 1 && l.order <= 9)
+    .sort((a, b) => a.order - b.order)
+
   return (
+    <div>
     <div className={styles.fieldContainer}>
       <div className={styles.infield}>
         <div className={styles.infieldGrass}></div>
@@ -70,6 +76,23 @@ export default function BaseballField({ lineup }: BaseballFieldProps) {
         }
         return null
       })()}
+    </div>
+
+    {/* 타순 리스트 */}
+    {battingOrder.length > 0 && (
+      <div className={styles.battingOrderList}>
+        <div className={styles.battingOrderTitle}>⚾ 타격 순서</div>
+        <div className={styles.battingOrderGrid}>
+          {battingOrder.map(p => (
+            <div key={p.order} className={styles.battingOrderItem}>
+              <span className={styles.battingOrderNum}>{p.order}</span>
+              <span className={styles.battingOrderName}>{p.member?.name}</span>
+              {p.position && <span className={styles.battingOrderPos}>{p.position}</span>}
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
     </div>
   )
 }

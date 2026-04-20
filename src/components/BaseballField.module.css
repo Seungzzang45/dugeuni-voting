@@ -121,6 +121,72 @@
   border: 1px solid #ffffff;
 }
 
+/* 타순 리스트 */
+.battingOrderList {
+  max-width: 400px;
+  margin: 1rem auto 0;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+.battingOrderTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-align: center;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.battingOrderGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.battingOrderItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  background-color: var(--bg-color);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent-gold);
+}
+
+.battingOrderNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background-color: #dc2626;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.battingOrderName {
+  flex: 1;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.battingOrderPos {
+  padding: 0.15rem 0.5rem;
+  background-color: rgba(181, 133, 0, 0.15);
+  color: var(--accent-gold);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
 /* Coordinates in % (Left, Top) */
 .posC { left: 50%; top: 92%; }
 .posP { left: 50%; top: 62%; }
