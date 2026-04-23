@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Header from './Header'
 import PollCard from './PollCard'
+import RankingsModal from './RankingsModal'
 import styles from './Dashboard.module.css'
 import { createCustomPoll, deletePollAndRevalidate, updatePoll } from '@/app/actions'
 import { ChevronDown, ChevronRight, Trash2, Pencil } from 'lucide-react'
@@ -25,6 +26,9 @@ export default function Dashboard({ members, initialPolls, pastPolls = [] }: Das
   const togglePoll = (id: string) => {
     setExpandedPollId(prev => (prev === id ? null : id))
   }
+
+  // Rankings modal state
+  const [showRankings, setShowRankings] = useState(false)
 
   // Edit poll state
   const [editingPollId, setEditingPollId] = useState<string | null>(null)
@@ -189,7 +193,9 @@ export default function Dashboard({ members, initialPolls, pastPolls = [] }: Das
 
   return (
     <div className={styles.dashboard}>
-      <Header isAdmin={isAdmin} onToggleAdmin={handleAdminAuth} />
+      <Header isAdmin={isAdmin} onToggleAdmin={handleAdminAuth} onOpenRankings={() => setShowRankings(true)} />
+
+      {showRankings && <RankingsModal onClose={() => setShowRankings(false)} />}
 
       {isAdmin && (
         <div className={styles.adminPanel}>
