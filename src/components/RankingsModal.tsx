@@ -12,10 +12,10 @@ interface RankingsModalProps {
 const teamStandings = [
   { rank: 1, team: '겸손', games: 4, points: 12, win: 4, loss: 0, draw: 0, rate: 1.00, gap: 0.00 },
   { rank: 1, team: '두근이', games: 5, points: 12, win: 4, loss: 1, draw: 0, rate: 0.80, gap: 0.50, highlight: true },
-  { rank: 3, team: 'Bullies', games: 4, points: 9, win: 3, loss: 1, draw: 0, rate: 0.75, gap: 1.00 },
-  { rank: 4, team: '미쁘다디자인', games: 4, points: 3, win: 1, loss: 3, draw: 0, rate: 0.25, gap: 3.00 },
-  { rank: 4, team: 'R2B 바이퍼즈', games: 4, points: 3, win: 1, loss: 3, draw: 0, rate: 0.25, gap: 3.00 },
-  { rank: 6, team: '다크나이츠', games: 5, points: 0, win: 0, loss: 5, draw: 0, rate: 0.00, gap: 4.50 },
+  { rank: 3, team: 'Bullies', games: 5, points: 9, win: 3, loss: 2, draw: 0, rate: 0.60, gap: 1.50 },
+  { rank: 4, team: '미쁘다디자인', games: 5, points: 6, win: 2, loss: 3, draw: 0, rate: 0.40, gap: 2.50 },
+  { rank: 4, team: 'R2B 바이퍼즈', games: 5, points: 6, win: 2, loss: 3, draw: 0, rate: 0.40, gap: 2.50 },
+  { rank: 6, team: '다크나이츠', games: 6, points: 0, win: 0, loss: 6, draw: 0, rate: 0.00, gap: 5.00 },
 ]
 
 // 타자 순위 (타율)
@@ -54,7 +54,7 @@ export default function RankingsModal({ onClose }: RankingsModalProps) {
         <div className={styles.header}>
           <div>
             <div className={styles.title}>🏆 팀 & 선수 기록</div>
-            <div className={styles.updateNote}>수동 업데이트: 2026년 4월 27일 기준</div>
+            <div className={styles.updateNote}>수동 업데이트: 2026년 5월 2일 기준</div>
           </div>
           <button onClick={onClose} className={styles.closeBtn}>
             <X size={22} />
