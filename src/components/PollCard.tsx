@@ -4,9 +4,10 @@ import React, { useState } from 'react'
 import styles from './PollCard.module.css'
 import { format } from 'date-fns'
 import { ko } from 'date-fns/locale'
-import { castVote, cancelVote, addComment, updateManager, deleteComment } from '@/app/actions'
+import { castVote, cancelVote, addComment, updateManager, deleteComment, updatePoll } from '@/app/actions'
 import LineupBuilder from './LineupBuilder'
 import BaseballField from './BaseballField'
+import { Pencil, Check, X } from 'lucide-react'
 
 interface PollCardProps {
   poll: any
@@ -16,9 +17,30 @@ interface PollCardProps {
 
 export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
   const [selectedMember, setSelectedMember] = useState<{id: string, name: string} | null>(null)
-  
+
   const [commentName, setCommentName] = useState('')
   const [commentText, setCommentText] = useState('')
+
+  const [isEditingHomeAway, setIsEditingHomeAway] = useState(false)
+  const [homeAwayDraft, setHomeAwayDraft] = useState(poll.homeAway || '')
+
+  const startEditHomeAway = () => {
+    setHomeAwayDraft(poll.homeAway || '')
+    setIsEditingHomeAway(true)
+  }
+
+  const saveHomeAway = async () => {
+    const localDate = new Date(poll.startTime)
+    const offset = localDate.getTimezoneOffset() * 60000
+    const localISOTime = new Date(localDate.getTime() - offset).toISOString()
+    await updatePoll(poll.id, {
+      title: poll.title,
+      opponent: poll.opponent || '',
+      homeAway: homeAwayDraft.trim(),
+      startTime: localISOTime,
+    })
+    setIsEditingHomeAway(false)
+  }
 
   const votes = poll.votes || []
   const attendVotes = votes.filter((v: any) => v.status === 'ATTEND')
@@ -88,7 +110,48 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
       <div className={styles.header}>
         <div className={styles.title}>
           <span>{poll.title}</span>
-          {poll.homeAway && <span className={styles.homeAwayBadge}>{poll.homeAway}</span>}
+          {isEditingHomeAway ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', marginLeft: '0.5rem' }}>
+              <input
+                type="text"
+                value={homeAwayDraft}
+                onChange={e => setHomeAwayDraft(e.target.value)}
+                placeholder="예: 1루 후공"
+                autoFocus
+                style={{ padding: '0.25rem 0.5rem', borderRadius: '6px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-primary)', fontSize: '0.9rem', width: '8rem' }}
+              />
+              <button
+                type="button"
+                onClick={saveHomeAway}
+                title="저장"
+                style={{ background: 'transparent', color: 'var(--accent-gold)', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+              >
+                <Check size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsEditingHomeAway(false)}
+                title="취소"
+                style={{ background: 'transparent', color: '#ff4d4f', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+              >
+                <X size={16} />
+              </button>
+            </span>
+          ) : (
+            <>
+              {poll.homeAway && <span className={styles.homeAwayBadge}>{poll.homeAway}</span>}
+              {isAdmin && (
+                <button
+                  type="button"
+                  onClick={startEditHomeAway}
+                  title={poll.homeAway ? '선/후공 수정' : '선/후공 추가'}
+                  style={{ background: 'transparent', color: 'var(--accent-gold)', border: 'none', cursor: 'pointer', marginLeft: '0.25rem', display: 'inline-flex', alignItems: 'center' }}
+                >
+                  <Pencil size={14} />
+                </button>
+              )}
+            </>
+          )}
         </div>
         <div className={styles.managerInfo}>
           {isAdmin ? (
