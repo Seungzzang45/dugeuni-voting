@@ -21,25 +21,43 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
   const [commentName, setCommentName] = useState('')
   const [commentText, setCommentText] = useState('')
 
-  const [isEditingHomeAway, setIsEditingHomeAway] = useState(false)
-  const [homeAwayDraft, setHomeAwayDraft] = useState(poll.homeAway || '')
-
-  const startEditHomeAway = () => {
-    setHomeAwayDraft(poll.homeAway || '')
-    setIsEditingHomeAway(true)
+  const toLocalInputValue = (d: Date) => {
+    const offset = d.getTimezoneOffset() * 60000
+    return new Date(d.getTime() - offset).toISOString().slice(0, 16)
   }
 
-  const saveHomeAway = async () => {
-    const localDate = new Date(poll.startTime)
-    const offset = localDate.getTimezoneOffset() * 60000
-    const localISOTime = new Date(localDate.getTime() - offset).toISOString()
-    await updatePoll(poll.id, {
-      title: poll.title,
+  const [isEditingMatch, setIsEditingMatch] = useState(false)
+  const [matchDraft, setMatchDraft] = useState({
+    startTime: toLocalInputValue(new Date(poll.startTime)),
+    opponent: poll.opponent || '',
+    homeAway: poll.homeAway || '',
+  })
+
+  const startEditMatch = () => {
+    setMatchDraft({
+      startTime: toLocalInputValue(new Date(poll.startTime)),
       opponent: poll.opponent || '',
-      homeAway: homeAwayDraft.trim(),
-      startTime: localISOTime,
+      homeAway: poll.homeAway || '',
     })
-    setIsEditingHomeAway(false)
+    setIsEditingMatch(true)
+  }
+
+  const saveMatch = async () => {
+    if (!matchDraft.startTime) {
+      alert('날짜/시간을 입력해주세요.')
+      return
+    }
+    const newDate = new Date(matchDraft.startTime)
+    const opp = matchDraft.opponent.trim()
+    const datePart = format(newDate, 'MM/dd(eee) HH:mm', { locale: ko })
+    const newTitle = opp ? `${datePart} vs ${opp}` : datePart
+    await updatePoll(poll.id, {
+      title: newTitle,
+      opponent: opp,
+      homeAway: matchDraft.homeAway.trim(),
+      startTime: newDate.toISOString(),
+    })
+    setIsEditingMatch(false)
   }
 
   const votes = poll.votes || []
@@ -110,47 +128,16 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
       <div className={styles.header}>
         <div className={styles.title}>
           <span>{poll.title}</span>
-          {isEditingHomeAway ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', marginLeft: '0.5rem' }}>
-              <input
-                type="text"
-                value={homeAwayDraft}
-                onChange={e => setHomeAwayDraft(e.target.value)}
-                placeholder="예: 1루 후공"
-                autoFocus
-                style={{ padding: '0.25rem 0.5rem', borderRadius: '6px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-primary)', fontSize: '0.9rem', width: '8rem' }}
-              />
-              <button
-                type="button"
-                onClick={saveHomeAway}
-                title="저장"
-                style={{ background: 'transparent', color: 'var(--accent-gold)', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
-              >
-                <Check size={16} />
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsEditingHomeAway(false)}
-                title="취소"
-                style={{ background: 'transparent', color: '#ff4d4f', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
-              >
-                <X size={16} />
-              </button>
-            </span>
-          ) : (
-            <>
-              {poll.homeAway && <span className={styles.homeAwayBadge}>{poll.homeAway}</span>}
-              {isAdmin && (
-                <button
-                  type="button"
-                  onClick={startEditHomeAway}
-                  title={poll.homeAway ? '선/후공 수정' : '선/후공 추가'}
-                  style={{ background: 'transparent', color: 'var(--accent-gold)', border: 'none', cursor: 'pointer', marginLeft: '0.25rem', display: 'inline-flex', alignItems: 'center' }}
-                >
-                  <Pencil size={14} />
-                </button>
-              )}
-            </>
+          {poll.homeAway && <span className={styles.homeAwayBadge}>{poll.homeAway}</span>}
+          {isAdmin && !isEditingMatch && (
+            <button
+              type="button"
+              onClick={startEditMatch}
+              title="경기 정보 수정"
+              style={{ background: 'transparent', color: 'var(--accent-gold)', border: 'none', cursor: 'pointer', marginLeft: '0.25rem', display: 'inline-flex', alignItems: 'center' }}
+            >
+              <Pencil size={14} />
+            </button>
           )}
         </div>
         <div className={styles.managerInfo}>
@@ -167,6 +154,58 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
           )}
         </div>
       </div>
+
+      {isAdmin && isEditingMatch && (
+        <div style={{ background: 'rgba(17,40,23,0.95)', border: '1px solid var(--accent-gold)', borderRadius: '8px', padding: '0.75rem', margin: '0.5rem 0.75rem 0' }}>
+          <div style={{ display: 'grid', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              날짜 / 시간
+              <input
+                type="datetime-local"
+                value={matchDraft.startTime}
+                onChange={e => setMatchDraft(d => ({ ...d, startTime: e.target.value }))}
+                style={{ display: 'block', width: '100%', marginTop: '0.25rem', padding: '0.4rem', borderRadius: '6px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-primary)' }}
+              />
+            </label>
+            <label style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              상대팀
+              <input
+                type="text"
+                value={matchDraft.opponent}
+                onChange={e => setMatchDraft(d => ({ ...d, opponent: e.target.value }))}
+                placeholder="예: 겸손"
+                style={{ display: 'block', width: '100%', marginTop: '0.25rem', padding: '0.4rem', borderRadius: '6px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-primary)' }}
+              />
+            </label>
+            <label style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              선/후공
+              <input
+                type="text"
+                value={matchDraft.homeAway}
+                onChange={e => setMatchDraft(d => ({ ...d, homeAway: e.target.value }))}
+                placeholder="예: 1루 후공"
+                style={{ display: 'block', width: '100%', marginTop: '0.25rem', padding: '0.4rem', borderRadius: '6px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-primary)' }}
+              />
+            </label>
+            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem' }}>
+              <button
+                type="button"
+                onClick={saveMatch}
+                style={{ flex: 1, padding: '0.5rem', background: 'var(--accent-gold)', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}
+              >
+                <Check size={16} /> 저장
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsEditingMatch(false)}
+                style={{ flex: 1, padding: '0.5rem', background: 'transparent', color: '#fff', border: '1px solid var(--border-color)', borderRadius: '6px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}
+              >
+                <X size={16} /> 취소
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className={styles.body}>
         {/* NON-VOTERS UP TOP FOR EASY MOBILE TAP */}
