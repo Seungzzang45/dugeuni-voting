@@ -7,6 +7,7 @@ import { ko } from 'date-fns/locale'
 import { castVote, cancelVote, addComment, updateManager, deleteComment, updatePoll } from '@/app/actions'
 import LineupBuilder from './LineupBuilder'
 import BaseballField from './BaseballField'
+import TeamStandings, { standingsUpdatedAt } from './TeamStandings'
 import { Pencil, Check, X } from 'lucide-react'
 
 interface PollCardProps {
@@ -287,6 +288,14 @@ export default function PollCard({ poll, members, isAdmin }: PollCardProps) {
             />
             <button type="submit" className={styles.commentButton}>등록</button>
           </form>
+        </div>
+
+        {/* TEAM STANDINGS (always visible below comments) */}
+        <div style={{ marginTop: '2rem', borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
+          <TeamStandings />
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.5rem', textAlign: 'right' }}>
+            수동 업데이트: {standingsUpdatedAt} 기준
+          </div>
         </div>
       </div>
 
