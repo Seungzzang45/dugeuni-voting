@@ -19,14 +19,14 @@ export interface TeamStanding {
 // 팀 순위 (승점제) — RankingsModal과 공유
 export const teamStandings: TeamStanding[] = [
   { rank: 1, team: '겸손', games: 5, points: 15, win: 5, loss: 0, draw: 0, rate: 1.00, gap: 0.00 },
-  { rank: 2, team: '두근이', games: 6, points: 12, win: 4, loss: 2, draw: 0, rate: 0.67, gap: 1.50, highlight: true },
-  { rank: 3, team: 'Bullies', games: 5, points: 9, win: 3, loss: 2, draw: 0, rate: 0.60, gap: 2.00 },
-  { rank: 4, team: '미쁘다디자인', games: 5, points: 6, win: 2, loss: 3, draw: 0, rate: 0.40, gap: 3.00 },
-  { rank: 4, team: 'R2B 바이퍼즈', games: 5, points: 6, win: 2, loss: 3, draw: 0, rate: 0.40, gap: 3.00 },
-  { rank: 6, team: '다크나이츠', games: 6, points: 0, win: 0, loss: 6, draw: 0, rate: 0.00, gap: 5.50 },
+  { rank: 2, team: 'Bullies', games: 6, points: 12, win: 4, loss: 2, draw: 0, rate: 0.67, gap: 1.50 },
+  { rank: 2, team: '두근이', games: 7, points: 12, win: 4, loss: 3, draw: 0, rate: 0.57, gap: 2.00, highlight: true },
+  { rank: 4, team: 'R2B 바이퍼즈', games: 6, points: 9, win: 3, loss: 3, draw: 0, rate: 0.50, gap: 2.50 },
+  { rank: 5, team: '미쁘다디자인', games: 5, points: 6, win: 2, loss: 3, draw: 0, rate: 0.40, gap: 3.00 },
+  { rank: 6, team: '다크나이츠', games: 7, points: 0, win: 0, loss: 7, draw: 0, rate: 0.00, gap: 6.00 },
 ]
 
-export const standingsUpdatedAt = '2026년 5월 5일'
+export const standingsUpdatedAt = '2026년 5월 12일'
 
 interface TeamStandingsProps {
   showTitle?: boolean

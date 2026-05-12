@@ -12,30 +12,31 @@ interface RankingsModalProps {
 // 타자 순위 (타율)
 const battingRankings = [
   { rank: 1, name: '김덕겸', avg: 0.800 },
-  { rank: 2, name: '신승우', avg: 0.583 },
-  { rank: 3, name: '신세휘', avg: 0.571 },
+  { rank: 2, name: '신승우', avg: 0.600 },
+  { rank: 3, name: '신세휘', avg: 0.556 },
   { rank: 4, name: '안황기', avg: 0.526 },
-  { rank: 5, name: '홍경택', avg: 0.500 },
   { rank: 5, name: '이호겸', avg: 0.500 },
   { rank: 5, name: '양성철', avg: 0.500 },
-  { rank: 8, name: '엄민영', avg: 0.444 },
+  { rank: 7, name: '홍경택', avg: 0.462 },
+  { rank: 8, name: '전계훈', avg: 0.444 },
   { rank: 8, name: '윤민환', avg: 0.444 },
-  { rank: 10, name: '김상훈', avg: 0.429 },
-  { rank: 11, name: '나인철', avg: 0.400 },
-  { rank: 11, name: '전계훈', avg: 0.400 },
-  { rank: 13, name: '문대웅', avg: 0.385 },
-  { rank: 14, name: '이광석', avg: 0.333 },
-  { rank: 15, name: '김학래', avg: 0.308 },
+  { rank: 10, name: '나인철', avg: 0.417 },
+  { rank: 11, name: '김상훈', avg: 0.364 },
+  { rank: 12, name: '문대웅', avg: 0.353 },
+  { rank: 13, name: '이광석', avg: 0.333 },
+  { rank: 14, name: '엄민영', avg: 0.308 },
+  { rank: 15, name: '김학래', avg: 0.267 },
   { rank: 16, name: '김현진', avg: 0.250 },
   { rank: 17, name: '이원중', avg: 0.000 },
 ]
 
 // 투수 순위 (다승, 방어율)
 const pitchingRankings = [
-  { rank: 1, name: '이광석', wins: 2, era: 1.75 },
+  { rank: 1, name: '이광석', wins: 2, era: 4.20 },
   { rank: 2, name: '문대웅', wins: 2, era: 10.89 },
-  { rank: 3, name: '신승우', wins: 0, era: 49.00 },
-  { rank: 3, name: '김현진', wins: 0, era: 49.00 },
+  { rank: 3, name: '안황기', wins: 0, era: 21.00 },
+  { rank: 4, name: '신승우', wins: 0, era: 49.00 },
+  { rank: 4, name: '김현진', wins: 0, era: 49.00 },
 ]
 
 export default function RankingsModal({ onClose }: RankingsModalProps) {
